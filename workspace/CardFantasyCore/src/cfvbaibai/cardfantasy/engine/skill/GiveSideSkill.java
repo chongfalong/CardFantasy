@@ -25,6 +25,9 @@ public class GiveSideSkill {
         List<CardInfo> allies = resolver.getAdjacentCards(field, card.getPosition());
         for (CardInfo ally : allies) {
             cardSkill.setGiveSkill(1);
+            if(ally.containsUsableSkill(cardSkill.getType())){
+                continue;
+            }
             ally.addSkill(cardSkill);
         }
     }

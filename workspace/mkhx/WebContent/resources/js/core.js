@@ -1,13 +1,13 @@
 ﻿/**
  * To code readers (including interviewers):
- *
+ * 
  * These scripts are not compacted because this is not for production use,
  * but to demonstrate my coding ability.
  * You may find some Chinese characters in the code.
  * That is pretty bad, I know,
  * but currently I do not have time to do localization.
  * Forgive me if you do not understand Chinese.
- *
+ * 
  * Author: CFvBaiBai
  */
 
@@ -20,7 +20,7 @@ CardFantasy.Core = {};
 
 var tiebaUrl = 'http://tieba.baidu.com/f?kw=%E9%AD%94%E5%8D%A1%E5%B9%BB%E6%83%B3%E6%A8%A1%E6%8B%9F%E5%99%A8';
 Core.tiebaUrl = tiebaUrl;
-
+    
 var goBackOrGoto = function(defaultUrl) {
     history.go(-1);
 };
@@ -70,6 +70,15 @@ var sendAjaxRequest = function(attrs) {
     $.post(url, postData, function(data) {
         dataHandler(context, data);
     }, requestType)
+    $.ajax(url, {
+        type: "POST",
+        data: postData,
+        success: function(data) { dataHandler(context, data); },
+        dataType: requestType,
+        headers: {
+            AntiBot: "Enabled"
+        }
+    })
     .success(function(xhr) {
         successHandler(context, xhr.responseText, xhr.status, xhr.statusText);
     })
@@ -325,14 +334,12 @@ Core.playLilithGame = playLilithGame;
 var playMapGame = function(count) {
     var deck = $('#map-deck').val().trim();
     var heroLv = $('#map-hero-lv').val();
-    var vldtC = $('#validateCode').val();
     var map = getMap();
     var postData = {
         deck: deck,
         hlv: heroLv,
         map: map,
-        count: count,
-        vldt:vldtC
+        count: count
     };
 
     $.cookie('map-battle', JSON.stringify(postData), { expires: 365 });
@@ -450,7 +457,7 @@ var getMap = function() {
         header.find("a.left-nav-button").attr('href', '#' + currentPanelId);
         header.find("h3.header-title").text($(currentPage).attr('data-title'));
         $(currentPage).prepend(header);
-
+        
         var panel = $('#left-panel-template').clone().attr('id', currentPanelId);
         panel.find("a[href='#" + currentPage.id + "']").addClass('ui-disabled');
         $(currentPage).prepend(panel);
@@ -497,11 +504,10 @@ $(document)
             }
         })();
     }
-    $('#codeValidateImg').trigger('click');
     $('#play-map-1-game-button').attr('href', 'javascript:CardFantasy.Core.playMapGame(1);');
     $('#simulate-map-1-game-button').attr('href', 'javascript:CardFantasy.Core.playMapGame(-1);');
     $('#play-map-massive-game-button').attr('href', 'javascript:CardFantasy.Core.playMapGame(1000);');
-
+    
     var showVictoryCondition = function() {
         var map = getMap();
         $.get('GetMapVictoryCondition?map=' + map, function(data) {
@@ -571,8 +577,8 @@ $(document)
         }
     };
 
-    $('#lilith-game-type').change(function() {
-        var gameType = $(this).children('option:selected').val();
+    $('#lilith-game-type').change(function() { 
+        var gameType = $(this).children('option:selected').val(); 
         if (gameType == 0) {
             $('#lilith-config-0').show();
             $('#lilith-config-1').hide();
