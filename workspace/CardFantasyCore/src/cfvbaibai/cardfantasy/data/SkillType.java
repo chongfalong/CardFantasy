@@ -294,7 +294,6 @@ public enum SkillType {
     雷霆一击("", 200, 50, 3, 0, new int[] {75,75,75,75,75,75,75,75,75,75}, SkillTag.抗免疫,SkillTag.魔法),
     雷霆之怒("", 200, 50, 3, 0, new int[] {75,75,75,75,75,75,75,75,75,75}, SkillTag.抗免疫,SkillTag.魔法),
     雷切("",400,0,3, 0,new int[] {75,75,75,75,75,75,75,75,75,75},SkillTag.抗免疫),
-    雷切("", 200, 75, 3, 0, new int[] {40,40,40,40,40,40,40,40,40,40}, SkillTag.抗免疫),
 
     大地之盾("80193", 0, SkillTag.控制, SkillTag.抗免疫, SkillTag.魔王无效, SkillTag.魔族天赋),
     一闪("", 50, 0, SkillTag.控制, SkillTag.抗免疫, SkillTag.魔王无效, SkillTag.魔族天赋),
