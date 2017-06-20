@@ -9,7 +9,7 @@ import cfvbaibai.cardfantasy.CardFantasyUserRuntimeException;
 import cfvbaibai.cardfantasy.GameOverSignal;
 import cfvbaibai.cardfantasy.GameUI;
 import cfvbaibai.cardfantasy.Global;
-import cfvbaibai.cardfantasy.*;
+import cfvbaibai.cardfantasy.Randomizer;
 import cfvbaibai.cardfantasy.data.Card;
 import cfvbaibai.cardfantasy.data.PlayerInfo;
 import cfvbaibai.cardfantasy.data.Rune;
@@ -374,7 +374,6 @@ public class BattleEngine {
         if (opField.getCard(i) == null) {
             resolver.resolvePreAttackHeroSkills(myField.getCard(i), getInactivePlayer());
             resolver.attackHero(myField.getCard(i), getInactivePlayer(), null, myField.getCard(i).getCurrentAT());
-
             if (myField.getCard(i)!=null&&myField.getCard(i).containsUsableSkill(SkillType.连斩)) {
                 boolean killCard = true;
                 for(;killCard;) {
@@ -406,13 +405,10 @@ public class BattleEngine {
             processAttackCard(myField, opField, i);
             if (myField.getCard(i) != null && !myField.getCard(i).isDead() &&
                     opField.getCard(i) != null && !opField.getCard(i).isDead()) {
-                if (myField.getCard(i).containsUsableSkill(SkillType.连击) || myField.getCard(i).containsUsableSkill(SkillType.刀语)) {
                 if (myField.getCard(i)!=null&&myField.getCard(i).containsUsableSkill(SkillType.连击) || myField.getCard(i).containsUsableSkill(SkillType.刀语)) {
                     processAttackCard(myField, opField, i);
                 }
             }
-
-
             if (myField.getCard(i) != null && !myField.getCard(i).isDead() &&
                         (opField.getCard(i) == null || opField.getCard(i).isDead())) {
                 if (myField.getCard(i)!=null&&myField.getCard(i).containsUsableSkill(SkillType.连斩)) {
@@ -442,7 +438,6 @@ public class BattleEngine {
                 ui.useSkill(myField.getCard(i), defender, skillUseInfo.getSkill(), true);
             }
         }
-        OnDamagedResult damagedResult = resolver.attackCard(myField.getCard(i), defender, null);
         CardInfo taunt = tauntCard(opField);
         OnDamagedResult damagedResult =null;
         if (taunt!=null)
@@ -474,8 +469,6 @@ public class BattleEngine {
                     }
 
                     for (CardInfo sweepDefender : sweepDefenders) {
-                        ui.useSkill(myField.getCard(i), sweepDefender, skillUseInfo.getSkill(), true);
-                        resolver.attackCard(myField.getCard(i), sweepDefender, skillUseInfo, damagedResult.originalDamage);
                         CardInfo tauntTwo = tauntCard(opField);
                         if (tauntTwo!=null)
                         {
@@ -505,9 +498,6 @@ public class BattleEngine {
         }
     }
 
-
-
-
     private boolean randomAttackCard(Field myField, Field opField, int i)throws HeroDieSignal {
         Randomizer random = stage.getRandomizer();
         SkillResolver resolver = this.stage.getResolver();
@@ -529,7 +519,6 @@ public class BattleEngine {
         }
         return false;
     }
-
 
     private Phase roundStart() throws GameOverSignal, AllCardsDieSignal, HeroDieSignal {
         if (this.stage.getRound() > stage.getRule().getMaxRound()) {

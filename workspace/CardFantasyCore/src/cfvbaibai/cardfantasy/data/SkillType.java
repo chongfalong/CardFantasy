@@ -13,7 +13,7 @@ public enum SkillType {
      * 削弱可以被淬炼、种族之力抵消，但瘟疫不能
      */
     瘟疫("31149", 5, SkillTag.永久, SkillTag.基础攻击加成),
-    凋零真言("",4,1,SkillTag.永久, SkillTag.基础攻击加成),   
+    凋零真言("",4,1,SkillTag.永久, SkillTag.基础攻击加成),
     /* 攻击力加成技能 */
     /**
      * 基础攻击力=初始攻击力*军团战力加成+淬杀+种族之力+本源之力+怒涛加成+嗜血加成+洞察加成+邪灵汲取。魔神战时洞察无效。
@@ -24,7 +24,6 @@ public enum SkillType {
     献祭("31144", 20, 10, SkillTag.永久, SkillTag.基础攻击加成),
     制衡("", 100, 0, SkillTag.永久, SkillTag.复活,SkillTag.基础攻击加成),
     灵魂献祭("", 100, 0, SkillTag.永久, SkillTag.复活,SkillTag.基础攻击加成),
-    侵蚀("", 100, 0, SkillTag.永久, SkillTag.基础攻击加成),
     侵蚀("", 100, 0, SkillTag.永久, SkillTag.基础攻击加成, SkillTag.魔王无效, SkillTag.魔族天赋),
     群攻提升("31754", 15, SkillTag.基础攻击加成, SkillTag.抗削弱),
     狂热("30880", 10, SkillTag.永久, SkillTag.基础攻击加成),
@@ -100,7 +99,6 @@ public enum SkillType {
     火墙("30950", 25, SkillTag.魔法),
     烈焰风暴("31128", 25, SkillTag.魔法),
     修罗地火攻("", 100, 10, 10, 10, SkillTag.魔法),
-    火攻("", 200, 0, 110, 10, SkillTag.魔法),
     火攻("", 200, 0, 110, 0, SkillTag.魔法),
     火烧连营("", 150, 0, 60, 0, SkillTag.魔法),
     化学风暴("", 700, 0, 50, 0, SkillTag.魔法),
@@ -201,7 +199,6 @@ public enum SkillType {
     动能追加("", 0),
     不动("30928", 0, SkillTag.不动),
     坚毅("", 0, SkillTag.不动),
-    灵魂封禁("", 0, 0, SkillTag.不动),
     灵魂禁封("", 0, 0, SkillTag.不动),
     神威("", 0, SkillTag.不动),
     月之守护("", 0, 0, new int[] { 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23 }, SkillTag.不动),
@@ -255,7 +252,6 @@ public enum SkillType {
     武形天火击("", 0, SkillTag.即死, SkillTag.抗不屈),
     咆哮("", 0, SkillTag.即死, SkillTag.抗不屈),
 
-    炼金失败("",0),
     炼金失败("",0,SkillTag.复活),
 
     封印("31157", 0, SkillTag.控制),
@@ -295,8 +291,6 @@ public enum SkillType {
     魔法毁灭("", 100, 0, 10, 0, SkillTag.抗免疫),
     赤之魔枪("", 200, 50, 3, 0, SkillTag.抗免疫),
     寒冰触碰("", 250, 50, 3, 0, new int[] {50,50,50,50,50,50,50,50,50,50}, SkillTag.抗免疫),
-    雷霆一击("", 200, 75, 3, 0, new int[] {75,75,75,75,75,75,75,75,75,75}, SkillTag.抗免疫),
-    雷霆之怒("", 200, 75, 3, 0, new int[] {75,75,75,75,75,75,75,75,75,75}, SkillTag.抗免疫),
     雷霆一击("", 200, 50, 3, 0, new int[] {75,75,75,75,75,75,75,75,75,75}, SkillTag.抗免疫,SkillTag.魔法),
     雷霆之怒("", 200, 50, 3, 0, new int[] {75,75,75,75,75,75,75,75,75,75}, SkillTag.抗免疫,SkillTag.魔法),
     雷切("",400,0,3, 0,new int[] {75,75,75,75,75,75,75,75,75,75},SkillTag.抗免疫),
@@ -317,8 +311,6 @@ public enum SkillType {
     武形印记("", 0, 200),
     闪光弹("", 5, 1),
     致盲("", 1, 1),
-    魔力法阵("", 15, 15, SkillTag.魔王无效),
-    魔力印记("", 15, 15),
     魔力法阵("", 15, SkillTag.魔王无效),
     魔力印记("", 20, SkillTag.魔王无效),
     东风("",175,0),
@@ -331,8 +323,6 @@ public enum SkillType {
 
     星云锁链("", 0, 0),
     生命链接("", 0),
-    逃跑("", 0),
-    夺魂("", 0, 1, SkillTag.复活),
     逃跑("", 0,SkillTag.抗夺魂),
     夺魂("", 0, 1, SkillTag.抗夺魂),
 
@@ -422,7 +412,6 @@ public enum SkillType {
     觉醒白虎守护("", SkillType.月神的护佑, 7, SkillType.祈福, 3),
     觉醒星之意志("", SkillType.灵魂消散, 0, SkillType.灵王的轰击, 7),
     觉醒狼顾("",  SkillType.雷神降临, 8, SkillType.雷霆一击, 5),
-    鬼才("", SkillType.侵蚀,0,SkillType.夺魂,1),
     鬼才("", SkillType.侵蚀,0,SkillType.夺魂,1,SkillTag.抗夺魂),
     镜魔("",SkillType.镜面,0,SkillType.镜像,0 ,SkillTag.抗沉默),
     刀语("",SkillType.连击,0,SkillType.弱点攻击,0 ),
@@ -455,7 +444,6 @@ public enum SkillType {
     五星万能卡牌("", 0),
 
     // 待更新列表：
-    化学风暴("", 0),
     变身("", 0),
     卖萌("", 0),
     大小通吃("", 0),
@@ -464,13 +452,10 @@ public enum SkillType {
     技能格挡("", 0),
     攻击提升("", 0),
     战争咆哮("", 0),
-    月之守望("", 0),
     樱花动漫("", 0),
     毒伤("", 0),
-    灵魂禁封("", 0),
     炽焰("", 0),
     物理格挡("", 0),
-    狂暴("", 0),
     群体不动("", 0),
     群体冰甲("", 0),
     群体反击("", 0),
