@@ -18,7 +18,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -557,16 +556,16 @@ public class AutoBattleController {
         	    break;
         	   }
         	  }
-        	  if(!StringUtils.isEmpty(vldtC) && vldtC.equalsIgnoreCase(code)){
-//     		     return "ok";
-        		  logger.info("验证OK");
-                 writer.print("ok");
-     		  }else{
-//     		     return "error";
-     			  logger.info("验证NG");
-     	         writer.print("验证码错误！！！");
-                 return;
-     		  }
+//        	  if(!StringUtils.isEmpty(vldtC) && vldtC.equalsIgnoreCase(code)){
+////     		     return "ok";
+//        		  logger.info("验证OK");
+//                 writer.print("ok");
+//     		  }else{
+////     		     return "error";
+//     			  logger.info("验证NG");
+//     	         writer.print("验证码错误！！！");
+//                 return;
+//     		  }
             logger.info("PlayMapMassiveGame from " + request.getRemoteAddr() + ":");
             logger.info(String.format("Lv = %d, Map = %s, Count = %d,ValidateCode=%s", heroLv, map, count,vldtC));
             logger.info("Deck = " + deck);
