@@ -1,5 +1,3 @@
-
-
 package cfvbaibai.cardfantasy.engine.skill;
 
 import java.util.List;

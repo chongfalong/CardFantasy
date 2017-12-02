@@ -45,11 +45,7 @@ public final class Return {
             defender.reset();
         }
         resolver.resolveLeaveSkills(defender);
-<<<<<<< HEAD
-        if(defender.containsAllSkill(SkillType.铁壁))
-=======
         if(defender.containsAllSkill(SkillType.铁壁)||defender.containsAllSkill(SkillType.驱虎吞狼))
->>>>>>> 3849ab788e8c2132bf7971d7f2b35ce659cb7cf2
         {
             for(SkillUseInfo defenderskill:defender.getAllUsableSkills())
             {
@@ -57,8 +53,6 @@ public final class Return {
                 {
                     ImpregnableDefenseHeroBuff.remove(resolver, defenderskill, defender);
                 }
-<<<<<<< HEAD
-=======
                 if (defenderskill.getType() == SkillType.驱虎吞狼)
                 {
                     ImpregnableDefenseHeroBuff.remove(resolver, defenderskill.getAttachedUseInfo2(), defender);
@@ -102,7 +96,6 @@ public final class Return {
                 {
                     ImpregnableDefenseHeroBuff.remove(resolver, defenderskill.getAttachedUseInfo2(), defender);
                 }
->>>>>>> 3849ab788e8c2132bf7971d7f2b35ce659cb7cf2
             }
         }
     }

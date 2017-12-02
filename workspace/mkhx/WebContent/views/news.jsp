@@ -37,8 +37,6 @@
             <div data-role="collapsible" data-collapsed="false" data-mini="true">
                 <h3>更新日志</h3>
                 <ul class="news-content">
-<<<<<<< HEAD
-=======
                     <li>2017-11-11: <x>欢笑，清风，波波</x><ul>
                         <li>修复卡牌【魔卡策划】bug，修复【孟德】可能出现的无限复制bug</li>
                         <li>修复被复活的卡牌不能发动降临技能的bug</li>
@@ -155,7 +153,6 @@
                         <li>修复技能【坚壁】，【剑域】，【生命符文】BUG</li>
                         <li>修复【血色玫瑰】死契召唤的【玫瑰甜心】无限制镜像BUG</li>
                     </ul></li>
->>>>>>> 3849ab788e8c2132bf7971d7f2b35ce659cb7cf2
                     <li>2017-06-22: <x>欢笑，清风，波波，林知兀等</x><ul>
                         <li>修复【铁壁】叠加错误的BUG，修复【剑域】不能叠加的BUG</li>
                         <li>修复【魔力法阵】不能给与魔神debuff的BUG</li>

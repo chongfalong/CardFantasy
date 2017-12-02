@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -169,7 +168,7 @@ public class AutoBattleController {
                 deck1, deck2, heroLv1, heroLv2, firstAttack, deckOrder, victoryConditionText1);
             logger.info(logMessage);
             VictoryCondition vc1 = VictoryCondition.parse(victoryConditionText1);
-            outputBattleOptions(writer, firstAttack, deckOrder,
+            outputBattleOptions(writer, firstAttack, deckOrder, 
                     p1HeroHpBuff, p1CardAtBuff, p1CardHpBuff, p2HeroHpBuff, p2CardAtBuff, p2CardHpBuff, vc1);
             WebPlainTextGameUI ui = new WebPlainTextGameUI();
             GameSetup setup = GameSetup.setupArenaGame(
@@ -221,7 +220,7 @@ public class AutoBattleController {
             writer.print(errorHelper.handleError(e, true));
         }
     }
-
+    
     @RequestMapping(value = "/PlayAutoMassiveGame")
     public void playAutoMassiveGame(HttpServletRequest request, HttpServletResponse response,
             @RequestParam("deck1") String deck1, @RequestParam("deck2") String deck2,
@@ -311,7 +310,7 @@ public class AutoBattleController {
                         gameType, targetRemainingGuardCount, remainingHP, eventCardNames, 1, ui);
             } else {
                 result = GameLauncher.playLilithGame(
-                        deck, lilithName, heroLv, gameType,
+                        deck, lilithName, heroLv, gameType, 
                         targetRemainingGuardCount, remainingHP, eventCardNames, 1, ui);
             }
 
@@ -401,7 +400,7 @@ public class AutoBattleController {
     }
 
     /**
-     *
+     * 
      * @param request
      * @param response
      * @param deck
@@ -472,7 +471,7 @@ public class AutoBattleController {
                             gameType, targetRemainingGuardCount, remainingHP, eventCardNames, count, ui);
                 } else {
                     result = GameLauncher.playLilithGame(
-                            deck, lilithName, heroLv, gameType,
+                            deck, lilithName, heroLv, gameType, 
                             targetRemainingGuardCount, remainingHP, eventCardNames, count, ui);
                 }
                 writer.print("<div style='color: red'>" + result.getValidationResult() + "</div>");
@@ -511,7 +510,7 @@ public class AutoBattleController {
             writer.print(errorHelper.handleError(e, false));
         }
     }
-
+    
     @RequestMapping(value = "/SimulateMap1MatchGame", headers = "Accept=application/json")
     public void simulateMap1MatchGame(HttpServletRequest request, HttpServletResponse response,
             @RequestParam("deck") String deck, @RequestParam("count") int count,
@@ -535,39 +534,18 @@ public class AutoBattleController {
             writer.println(errorHelper.handleError(e, true));
         }
     }
-
+    
     @RequestMapping(value = "/PlayMapMassiveGame")
     public void playMapMassiveGame(HttpServletRequest request, HttpServletResponse response,
             @RequestParam("deck") String deck, @RequestParam("hlv") int heroLv, @RequestParam("map") String map,
-            @RequestParam("count") int count,@RequestParam("vldt") String vldtC) throws IOException {
-//    	ImageGenController i = new ImageGenController();
-//    	i.checkimagecode(request, response);
+            @RequestParam("count") int count) throws IOException {
         PrintWriter writer = response.getWriter();
         GameUI ui = new DummyGameUI();
         try {
-        	String code = null;
-        	  //1:获取cookie里面的验证码信息
-        	  Cookie[] cookies = request.getCookies();
-        	  for (Cookie cookie : cookies) {
-        	   if ("imagecode".equals(cookie.getName())) {
-        	    code = cookie.getValue();
-        	    break;
-        	   }
-        	  }
-//        	  if(!StringUtils.isEmpty(vldtC) && vldtC.equalsIgnoreCase(code)){
-////     		     return "ok";
-//        		  logger.info("验证OK");
-//                 writer.print("ok");
-//     		  }else{
-////     		     return "error";
-//     			  logger.info("验证NG");
-//     	         writer.print("验证码错误！！！");
-//                 return;
-//     		  }
             logger.info("PlayMapMassiveGame from " + request.getRemoteAddr() + ":");
-            logger.info(String.format("Lv = %d, Map = %s, Count = %d,ValidateCode=%s", heroLv, map, count,vldtC));
+            logger.info(String.format("Lv = %d, Map = %s, Count = %d", heroLv, map, count));
             logger.info("Deck = " + deck);
-
+            
             this.userActionRecorder.addAction(new UserAction(new Date(), request.getRemoteAddr(), "Play Map Massive Game",
                     String.format("Deck=%s<br />Lv=%d, Count=%d, Map=%s", deck, heroLv, count, map)));
 
@@ -600,8 +578,6 @@ public class AutoBattleController {
         }
     }
 
-<<<<<<< HEAD
-=======
     @RequestMapping(value = "/PlayDungeons1MatchGame")
     public void playDungeons1MatchGame(HttpServletRequest request, HttpServletResponse response,
                                   @RequestParam("fa") int firstAttack, @RequestParam("do") int deckOrder,
@@ -714,16 +690,15 @@ public class AutoBattleController {
         }
     }
     
->>>>>>> 3849ab788e8c2132bf7971d7f2b35ce659cb7cf2
     @RequestMapping(value = "/GetCardDetail", headers = "Accept=application/json")
     public void getCardDetail(HttpServletRequest request, HttpServletResponse response,
             @RequestParam("playerId") String playerId, @RequestParam("uniqueName") String uniqueName,
             @RequestParam("type") String type) throws IOException {
     }
-
+    
     @Autowired
     private CardDataStore store;
-
+    
     @RequestMapping(value = "/GetDataStore", headers = "Accept=application/json")
     public void getDataStore(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
@@ -745,7 +720,7 @@ public class AutoBattleController {
             }
             result.put("entities", entities);
 
-            List<SkillTypeRuntimeInfo> skillList = new ArrayList<SkillTypeRuntimeInfo>();
+            List<SkillTypeRuntimeInfo> skillList = new ArrayList<SkillTypeRuntimeInfo>(); 
             for (SkillType skillType : SkillType.values()) {
                 if (!skillType.containsTag(SkillTag.不可洗炼)) {
                     skillList.add(new SkillTypeRuntimeInfo(skillType));
@@ -766,7 +741,7 @@ public class AutoBattleController {
             writer.print(errorHelper.handleError(e, true));
         }
     }
-
+    
     @RequestMapping(value = "/GetMapVictoryCondition", headers = "Accept=application/json")
     public void getMapVictoryCondition(HttpServletRequest request, HttpServletResponse response,
             @RequestParam("map") String map) throws IOException {
@@ -828,7 +803,7 @@ public class AutoBattleController {
             writer.print(errorHelper.handleError(e, true));
         }
     }
-
+    
     @RequestMapping(value = "/GetMapDeckInfo", headers = "Accept=application/json")
     public void getMapDeckInfo(HttpServletRequest request, HttpServletResponse response,
         @RequestParam("map") String map) throws IOException {

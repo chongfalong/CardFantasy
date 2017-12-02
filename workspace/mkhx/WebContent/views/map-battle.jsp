@@ -1,33 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<script type="text/javascript">
-$(document).ready(function() {
-//	alert("****");
- flushValidateCode();//进入页面就刷新生成验证码
- });
-
-/* 刷新生成验证码 */
-function flushValidateCode(){
-var validateImgObject = document.getElementById("codeValidateImg");
-validateImgObject.src = "${pageContext.request.contextPath }/getSysManageLoginCode?time=" + new Date();
-//alert("${pageContext.request.contextPath }/getSysManageLoginCode?time=");
-}
-/*校验验证码输入是否正确*/
-function checkImg(code){
- var url = "${pageContext.request.contextPath}/checkimagecode";
- //alert("111"+url)
- $.get(url,{"validateCode":code},function(data){
-// alert("***"+data);
- if(data=="ok"){
- //alert("ok!")
-   flushValidateCode();
- }else{
-//   alert("error!")
-   flushValidateCode();
- }
- })
-}
-</script>
-
     <div id="map-battle" class="main-page" data-role="page" data-title="地图战" data-mini="true" data-theme="${theme}">
         <div data-role="content">
             <div data-role="collapsible" data-collapsed="false" data-mini="true">
@@ -346,15 +317,6 @@ function checkImg(code){
                     </div>
                 </div>
             </div>
-
-    <div class="form-group">
-     <div class="ui-block-b">
-      <input id="validateCode" onblur="checkImg(this.value)" name="validateCode" type="text" class="form-control" placeholder="输入验证码"/>
-     </div>
-     <span class="test"><img id="codeValidateImg" onClick="javascript:flushValidateCode();"/></span>
-     <p class="test"><a href="javascript:flushValidateCode();" >换一张</a></p>
-    </div>
-
             <div data-mini="true" data-role="controlgroup" data-type="horizontal" data-disabled="false">
                 <a id="play-map-1-game-button" class="battle-button" data-role="button" data-mini="true">文字战斗</a>
                 <a id="simulate-map-1-game-button" class="battle-button" data-role="button" data-mini="true">动画战斗</a>

@@ -1158,10 +1158,6 @@ public class SkillResolver {
             } else if (deadCardSkillUseInfo.getType() == SkillType.召唤玫瑰剑士) {
                 Summon.apply(this, deadCardSkillUseInfo.getAttachedUseInfo2(), deadCard, SummonType.Normal, 1,
                         "玫瑰甜心");
-<<<<<<< HEAD
-            } else if (deadCardSkillUseInfo.getType() == SkillType.铁壁) {
-                ImpregnableDefenseHeroBuff.remove(this, deadCardSkillUseInfo, deadCard);
-=======
             } else if (deadCardSkillUseInfo.getType() == SkillType.白帝托孤) {
                 Summon.apply(this, deadCardSkillUseInfo, deadCard, SummonType.Random, 1,
                         "三国英魂卧龙","三国英魂汉升","三国英魂子龙","三国英魂孟起");
@@ -1172,7 +1168,6 @@ public class SkillResolver {
                 ImpregnableDefenseHeroBuff.remove(this, deadCardSkillUseInfo, deadCard);
             } else if (deadCardSkillUseInfo.getType() == SkillType.驱虎吞狼) {
                 ImpregnableDefenseHeroBuff.remove(this, deadCardSkillUseInfo.getAttachedUseInfo2(), deadCard);
->>>>>>> 3849ab788e8c2132bf7971d7f2b35ce659cb7cf2
             }
         }
         if (!deadCard.isSilent()) {
@@ -1886,8 +1881,6 @@ public class SkillResolver {
                     GiantEarthquakesLandslides.apply(this, skillUseInfo.getSkill(), card, enemy, 1);
                 } else if (skillUseInfo.getType() == SkillType.铁壁) {
                     ImpregnableDefenseHeroBuff.apply(this, skillUseInfo, card);
-<<<<<<< HEAD
-=======
                 } else if (skillUseInfo.getType() == SkillType.驱虎吞狼) {
                     ImpregnableDefenseHeroBuff.apply(this, skillUseInfo.getAttachedUseInfo2(), card);
                     Erode.apply(this, skillUseInfo.getAttachedUseInfo1(), card, enemy, null);
@@ -1903,7 +1896,6 @@ public class SkillResolver {
                     Genie.apply(this, skillUseInfo, card);
                 } else if (skillUseInfo.getType() == SkillType.决胜时刻) {
                     TimeTravel.apply(skillUseInfo, this, card.getOwner(), enemy);
->>>>>>> 3849ab788e8c2132bf7971d7f2b35ce659cb7cf2
                 }
             }
         }
@@ -1995,11 +1987,6 @@ public class SkillResolver {
                 TogetherBuff.remove(this, deadCardSkillUseInfo, card, null);
             } else if (deadCardSkillUseInfo.getType() == SkillType.神圣守护) {
                 HolyGuard.remove(this, deadCardSkillUseInfo, card);
-<<<<<<< HEAD
-            } else if (deadCardSkillUseInfo.getType() == SkillType.坚壁) {
-                CoefficientThreeBuff.remove(this, deadCardSkillUseInfo, card);
-=======
->>>>>>> 3849ab788e8c2132bf7971d7f2b35ce659cb7cf2
             } else if (deadCardSkillUseInfo.getType() == SkillType.西凉铁骑) {
                 GiveSideSkill.remove(this, deadCardSkillUseInfo, card, deadCardSkillUseInfo.getAttachedUseInfo1().getSkill());
             } else if (deadCardSkillUseInfo.getType() == SkillType.袈裟斩) {
@@ -2031,11 +2018,8 @@ public class SkillResolver {
                     || deadCardSkillUseInfo.getType() == SkillType.军团蛮荒之力
                     || deadCardSkillUseInfo.getType() == SkillType.军团地狱之力) {
                 LegionBuff.remove(this, deadCardSkillUseInfo, card);
-<<<<<<< HEAD
-=======
             } else if (deadCardSkillUseInfo.getSkill().getGiveSkill() == 1) {
                 GiveSideSkill.removeAll(this,deadCardSkillUseInfo,card);
->>>>>>> 3849ab788e8c2132bf7971d7f2b35ce659cb7cf2
             }
         }
     }
@@ -2460,15 +2444,10 @@ public class SkillResolver {
                 AllSpeedUp.apply(skillUseInfo, this, card);
             } else if (skillUseInfo.getType() == SkillType.混乱领域) {
                 Confusion.apply(skillUseInfo, this, card, defenderHero, 3);
-<<<<<<< HEAD
-            } else if (skillUseInfo.getType() == SkillType.镜像) {
-                Summon.apply(this, skillUseInfo, card, SummonType.Summoning, 1, card.getName());
-=======
             }else if (skillUseInfo.getType() == SkillType.拔刀术) {
                 TheSword.apply(this, skillUseInfo, card);
             } else if (skillUseInfo.getType() == SkillType.镜像&&flag) {
                 Summon.apply(this, skillUseInfo, card, SummonType.Normal, 1, card.getName());
->>>>>>> 3849ab788e8c2132bf7971d7f2b35ce659cb7cf2
             }
         }
     }

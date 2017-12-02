@@ -58,10 +58,7 @@ public final class CoefficientThreeBuff {
             if (race != null && summonCard.getOriginalRace() != race) {
                 return;
             }
-<<<<<<< HEAD
-=======
             if(allies.contains(summonCard)){
->>>>>>> 3849ab788e8c2132bf7971d7f2b35ce659cb7cf2
                 resolver.getStage().getUI().useSkill(card, skill, true);
                 if (effectType == SkillEffectType.ATTACK_CHANGE) {
                     impactAdd = summonCard.getInitAT() * impact / 100;
@@ -72,13 +69,8 @@ public final class CoefficientThreeBuff {
                 } else {
                     throw new CardFantasyRuntimeException("Invalid effect type: " + effectType.name());
                 }
-<<<<<<< HEAD
-                ally.addCoefficientEffect(new SkillEffect(effectType, skillUseInfo, impact, false));
-
-=======
                 summonCard.addCoefficientEffect(new SkillEffect(effectType, skillUseInfo, impactAdd, false));
             }
->>>>>>> 3849ab788e8c2132bf7971d7f2b35ce659cb7cf2
         }
     }
 

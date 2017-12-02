@@ -1038,8 +1038,6 @@
         <Skill type="寒冰触碰" level="4" unlock="5"  />
         <Skill type="复活" level="0" unlock="10" sumon="true"/>
     </Card>
-<<<<<<< HEAD
-=======
     <Card id="1603" name="三国英魂·玄德" wikiId="" race="王国" speed="3" star="5" cost="19" incrCost="2" at="335" hp="1315" incrAT="47" incrHP="40">
         <Skill type="桃园结义" level="0" unlock="0" />
         <Skill type="仁德之君" level="0" unlock="5"  />
@@ -1105,7 +1103,6 @@
         <Skill type="连锁攻击" level="5" unlock="5"  />
         <Skill type="水流护甲" level="5" unlock="10" />
     </Card>
->>>>>>> 3849ab788e8c2132bf7971d7f2b35ce659cb7cf2
 
 
     <!-- 森林 -->
