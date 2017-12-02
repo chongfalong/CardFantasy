@@ -31,6 +31,7 @@ public class CardInfo extends EntityInfo {
     // Used to record the previous position after card dies.
     private int cachedPosition;
     private boolean deadOnce;
+    private boolean isSumon;
     
     private int eternalWound = 0;
 
@@ -51,6 +52,7 @@ public class CardInfo extends EntityInfo {
         }
         this.cachedPosition = -1;
         this.deadOnce = false;
+        this.isSumon = false;
     }
 
     public List<SkillUseInfo> getSkillUserInfos(){
@@ -80,6 +82,16 @@ public class CardInfo extends EntityInfo {
                this.skillUseInfos.remove(j);
                break;
            }
+        }
+    }
+
+    public void removeAllGiveSkill()
+    {
+        for(int j=0;j<this.skillUseInfos.size();j++){
+            if(this.skillUseInfos.get(j).getSkill().getGiveSkill() == 1)
+            {
+                this.skillUseInfos.remove(j);
+            }
         }
     }
     
@@ -121,7 +133,7 @@ public class CardInfo extends EntityInfo {
         }
         this.effects.get(type).add(effect);
         if (effect.getType() == SkillEffectType.MAXHP_CHANGE) {
-            this.setBasicHP(this.getHP() *(100+ effect.getValue())/100);
+            this.setBasicHP(this.getHP() + effect.getValue());
         }
     }
 
@@ -231,6 +243,10 @@ public class CardInfo extends EntityInfo {
     }
 
     public int getLevel3AT() {
+        if((this.getLevel2AT() + this.getSpecificLevelEffectAT(SkillTag.独立攻击加成)) <0)
+        {
+            return 0;
+        }
         return this.getLevel2AT() + this.getSpecificLevelEffectAT(SkillTag.独立攻击加成);
     }
     
@@ -293,6 +309,35 @@ public class CardInfo extends EntityInfo {
         this.hp = this.card.getMaxHP();
         this.status = new CardStatus();
         this.effects.clear();
+        this.setDeadOnce(false);
+    }
+
+    public void resetStart() {
+        this.hp = this.card.getMaxHP();
+        this.status = new CardStatus();
+        List<SkillEffect> addEffect = new ArrayList<SkillEffect>();
+        List<SkillEffect> addEffect2 = new ArrayList<SkillEffect>();
+        for(SkillType key : this.effects.keySet())
+        {
+            if(key== SkillType.拔刀术)
+            {
+                addEffect = this.effects.get(key);
+            }
+            if(key== SkillType.偷偷削弱)
+            {
+                addEffect2 = this.effects.get(key);
+            }
+
+        }
+        this.effects.clear();
+        if(addEffect.size()!=0)
+        {
+            this.effects.put(SkillType.拔刀术,addEffect);
+        }
+        if(addEffect2.size()!=0)
+        {
+            this.effects.put(SkillType.偷偷削弱,addEffect2);
+        }
         this.setDeadOnce(false);
     }
 
@@ -723,7 +768,7 @@ public class CardInfo extends EntityInfo {
         this.eternalWound += this.getMaxHP() - remainingHP;
     }
 
-    public boolean isAwaken(SkillUseInfo skillUseInfo, Race race) {
+    public boolean isAwaken(SkillUseInfo skillUseInfo, Race race,int count) {
         if (this.isDead()) {
             return false;
         }
@@ -735,9 +780,12 @@ public class CardInfo extends EntityInfo {
         }
         List<CardInfo> aliveCards = this.getOwner().getField().getAliveCards();
         for (CardInfo aliveCard : aliveCards) {
-            if (aliveCards != this && aliveCard.getRace() == race) {
-                this.addEffect(new SkillEffect(SkillEffectType.SKILL_AWAKEN, skillUseInfo, 0, true));
-                return true;
+            if (aliveCard.getRace() == race) {
+                count = count-1;
+                if(count<1) {
+                    this.addEffect(new SkillEffect(SkillEffectType.SKILL_AWAKEN, skillUseInfo, 0, true));
+                    return true;
+                }
             }
         }
         return false;
@@ -762,4 +810,13 @@ public class CardInfo extends EntityInfo {
         }
         return status.get(0).getCause().getOwner();
     }
+
+    public boolean getIsSummon(){
+        return this.isSumon;
+    }
+
+    public void setIsSummon(boolean isSummon){
+        this.isSumon = isSummon;
+    }
+
 }
