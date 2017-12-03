@@ -228,7 +228,7 @@ public class SkillResolver {
                 Resurrection.apply(this, skillUseInfo, attacker);
             } else if (skillUseInfo.getType() == SkillType.祈愿) {
                 Supplication.apply(this, skillUseInfo, attacker,defender);
-            } else if (skillUseInfo.getType() == SkillType.号角) {
+            } else if (skillUseInfo.getType() == SkillType.号角||skillUseInfo.getType() == SkillType.集结旗帜) {
                 Horn.apply(skillUseInfo, this, attacker);
             } else if (skillUseInfo.getType() == SkillType.觉醒风之祈愿) {
                 if(skillUseInfo.getOwner().getOwner().getHand().isFull())
@@ -1115,7 +1115,8 @@ public class SkillResolver {
                         reincarnated = true;
                         break;
                     }
-                }else if(deadCardSkillUseInfo.getType() == SkillType.司命 || deadCardSkillUseInfo.getType() == SkillType.不灭定律){
+                }else if(deadCardSkillUseInfo.getType() == SkillType.司命 || deadCardSkillUseInfo.getType() == SkillType.不灭定律
+                        ||deadCardSkillUseInfo.getType() == SkillType.不灭||deadCardSkillUseInfo.getType() == SkillType.顽强){
                     Reborn.apply(this, deadCardSkillUseInfo.getSkill(), deadCard, result.unbending);
                 }
             }
@@ -1847,7 +1848,7 @@ public class SkillResolver {
             } else if (!skillUseInfo.getSkill().isDeathSkill()) {
                 if (skillUseInfo.getType() == SkillType.反噬) {
                     CounterBite.apply(skillUseInfo, this, card);
-                } else if (skillUseInfo.getType() == SkillType.星云锁链) {
+                } else if (skillUseInfo.getType() == SkillType.星云锁链||skillUseInfo.getType() == SkillType.星团锁链) {
                     NebulaChain.apply(skillUseInfo, this, card);
                 } else if (skillUseInfo.getType() == SkillType.分解反应) {
                     Destroy.apply(this, skillUseInfo.getAttachedUseInfo1().getSkill(), card, enemy, 1);

@@ -53,6 +53,7 @@ public final class Reincarnation {
             }
             Grave grave = card.getOwner().getGrave();
             grave.removeCard(card);
+//            System.out.print(card);
             Hand hand = card.getOwner().getHand();
             if (hand.isFull()) {
                 ui.cardToDeck(card.getOwner(), card);
