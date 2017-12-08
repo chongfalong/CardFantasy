@@ -1842,6 +1842,15 @@ public class SkillResolver {
                 } else if (skillUseInfo.getType() == SkillType.三国武魂) {
                     Summon.apply(this, skillUseInfo, card, SummonType.RandomSummoning, 1,
                             "三国英魂子龙","三国英魂翼德","三国英魂奉先","三国英魂孟起","三国樱魂文远","三国英魂云长","三国英魂元让","三国英魂汉升","三国英魂子义");
+                } else if (skillUseInfo.getType() == SkillType.魏国英魂) {
+                    Summon.apply(this, skillUseInfo, card, SummonType.RandomSummoning, 1,
+                            "三国英魂·孟德","三国英魂·仲达","三国樱魂·文远","三国英魂·元让","三国英魂·甄姬","三国英魂·文若");
+                } else if (skillUseInfo.getType() == SkillType.蜀国英魂) {
+                    Summon.apply(this, skillUseInfo, card, SummonType.RandomSummoning, 1,
+                            "三国英魂·子龙","三国英魂·翼德","三国英魂·卧龙","三国英魂·孔明","三国英魂·孟起","三国英魂·云长","三国英魂·汉升","三国英魂·玄德","三国英魂·星彩");
+                } else if (skillUseInfo.getType() == SkillType.吴国英魂) {
+                    Summon.apply(this, skillUseInfo, card, SummonType.RandomSummoning, 1,
+                            "三国英魂·大乔,三国英魂·仲谋,三国英魂·子敬,三国英魂·伯言","三国英魂·子义");
                 }  else if (skillUseInfo.getType() == SkillType.新生) {
                     NewBorn.apply(this, skillUseInfo, card, 1);
                 }
