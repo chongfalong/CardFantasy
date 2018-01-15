@@ -179,6 +179,7 @@ public class BattleEngine {
 
     private Phase summonCards() throws HeroDieSignal {
         Player player = this.getActivePlayer();
+        this.stage.getResolver().setStagePhase(Phase.召唤);
         for (CardInfo card : this.getActivePlayer().getField().getAliveCards()) {
             this.stage.getResolver().removeStatus(card, CardStatusType.复活);
         }
@@ -206,6 +207,7 @@ public class BattleEngine {
     }
 
     private Phase roundEnd() throws HeroDieSignal {
+        this.stage.getResolver().setStagePhase(Phase.结束);
         for (CardInfo card : this.getActivePlayer().getGrave().toList()) {
             this.stage.getResolver().resolvePostcastSkills(card, this.getInactivePlayer());
         }
@@ -244,6 +246,7 @@ public class BattleEngine {
          */
 
         SkillResolver resolver = stage.getResolver();
+        this.stage.getResolver().setStagePhase(Phase.战斗);
         GameUI ui = stage.getUI();
 
         ui.battleBegins();
@@ -440,6 +443,7 @@ public class BattleEngine {
             if (skillUseInfo.getType() == SkillType.横扫 ||
                     skillUseInfo.getType() == SkillType.灵击 ||
                     skillUseInfo.getType() == SkillType.三千世界 ||
+                    skillUseInfo.getType() == SkillType.魔龙之怒 ||
                     skillUseInfo.getType() == SkillType.鬼彻 ||
                     skillUseInfo.getType() == SkillType.毒杀) {
                 ui.useSkill(myField.getCard(i), defender, skillUseInfo.getSkill(), true);
@@ -470,6 +474,7 @@ public class BattleEngine {
             for (SkillUseInfo skillUseInfo : myField.getCard(i).getUsableNormalSkills()) {
                 if (skillUseInfo.getType() == SkillType.横扫 ||
                         skillUseInfo.getType() == SkillType.三千世界 ||
+                        skillUseInfo.getType() == SkillType.魔龙之怒 ||
                         skillUseInfo.getType() == SkillType.鬼彻 ||
                         skillUseInfo.getType() == SkillType.灵击 ||
                         skillUseInfo.getType() == SkillType.毒杀) {
@@ -482,6 +487,10 @@ public class BattleEngine {
                     }
 
                     for (CardInfo sweepDefender : sweepDefenders) {
+                        if(!sweepDefender.isAlive())
+                        {
+                            continue;
+                        }
                         //木盒修改嘲讽卡牌对横扫不生效。
 //                        CardInfo tauntTwo = tauntCard(opField);
 //                        if (tauntTwo!=null)
@@ -520,6 +529,10 @@ public class BattleEngine {
 //                        {
 //                            continue;
 //                        }
+                        if(!sweepDefender.isAlive())
+                        {
+                            continue;
+                        }
                         ui.useSkill(myField.getCard(i), sweepDefender, skillUseInfo.getSkill(), true);
                         resolver.attackCard(myField.getCard(i), sweepDefender, skillUseInfo, damagedResult.originalDamage);
                         if (myField.getCard(i) == null ||myField.getCard(i).isDead()) {
@@ -567,7 +580,7 @@ public class BattleEngine {
         }
 
         this.stage.getResolver().deactivateRunes(player);
-
+        this.stage.getResolver().setStagePhase(Phase.开始);
         this.stage.getUI().roundStarted(player, this.stage.getRound());
         int thresholdRound = 51;
 
@@ -585,6 +598,7 @@ public class BattleEngine {
 
     private Phase drawCard() {
         Player activePlayer = this.getActivePlayer();
+        this.stage.getResolver().setStagePhase(Phase.抽卡);
         Hand hand = activePlayer.getHand();
         if (hand.size() >= this.stage.getRule().getMaxHandCards()) {
             stage.getUI().cantDrawHandFull(activePlayer);

@@ -4,15 +4,13 @@ import cfvbaibai.cardfantasy.CardFantasyRuntimeException;
 import cfvbaibai.cardfantasy.Randomizer;
 import cfvbaibai.cardfantasy.data.CardSkill;
 import cfvbaibai.cardfantasy.data.Skill;
-import cfvbaibai.cardfantasy.engine.Player;
-import cfvbaibai.cardfantasy.engine.SkillUseInfo;
-import cfvbaibai.cardfantasy.engine.SkillResolver;
-import cfvbaibai.cardfantasy.engine.CardInfo;
+import cfvbaibai.cardfantasy.engine.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class AddSkillOpponent {
-    public static void apply(SkillResolver resolver, SkillUseInfo skillUseInfo, CardInfo card, Skill addSkill,int number,Player defenderHero) {
+    public static void apply(SkillResolver resolver, SkillUseInfo skillUseInfo, CardInfo card, Skill addSkill,int number,Player defenderHero)throws HeroDieSignal {
         if (card == null || card.isDead()) {
             throw new CardFantasyRuntimeException("card should not be null or dead!");
         }
@@ -22,11 +20,12 @@ public class AddSkillOpponent {
         List<CardInfo> allHandCards = defenderHero.getHand().toList();
         List<CardInfo> addCard= new ArrayList<CardInfo>();
         List<CardInfo> revivableCards = new ArrayList<CardInfo>();
+        SkillUseInfo thisSkillUserInfo=null;
         boolean flag = true;
         for (CardInfo handCard : allHandCards) {
             for(SkillUseInfo skillInfo:handCard.getSkillUserInfos())
             {
-                if(skillInfo.getSkill().getGiveSkill()==1)
+                if(skillInfo.getGiveSkill()==1)
                 {
                     flag=false;
                     break;
@@ -48,12 +47,17 @@ public class AddSkillOpponent {
                 revivableCards, number, true, null);
 
         for (CardInfo once : addCard) {
+            OnAttackBlockingResult result = resolver.resolveAttackBlockingSkills(card, once, skill, 1);
+            if(!result.isAttackable()) {
+                continue;
+            }
             if(once.containsAllSkill(addSkill.getType()))
             {
                 continue;
             }
-            cardSkill.setGiveSkill(1);
-            once.addSkill(cardSkill);
+            thisSkillUserInfo = new SkillUseInfo(once,cardSkill);
+            thisSkillUserInfo.setGiveSkill(1);
+            once.addSkill(thisSkillUserInfo);
         }
     }
 

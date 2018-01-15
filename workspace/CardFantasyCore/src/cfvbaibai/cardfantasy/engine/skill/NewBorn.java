@@ -10,7 +10,7 @@ import cfvbaibai.cardfantasy.GameUI;
 import cfvbaibai.cardfantasy.Randomizer;
 
 public class NewBorn {
-    public static void apply(SkillResolver resolver, SkillUseInfo skillUseInfo, CardInfo card,int victimCount) throws HeroDieSignal{
+    public static void apply(SkillResolver resolver, SkillUseInfo skillUseInfo, CardInfo card,Player defender,int victimCount) throws HeroDieSignal{
         if (card == null || card.isDead())  {
             throw new CardFantasyRuntimeException("card should not be null or dead!");
         }
@@ -26,16 +26,23 @@ public class NewBorn {
         for (CardInfo victim : victims) {
             if (!victim.containsAllUsableSkillsWithTag(SkillTag.新生)) {
                 for (SkillUseInfo victimSkillUseInfo : victim.getAllUsableSkillsIgnoreSilence()) {
-                    resolver.getStage().removeUsed(victimSkillUseInfo);
+                    resolver.getStage().removeUsed(victimSkillUseInfo,skillUseInfo.getOwner().getOwner(),defender);
                 }
                 ui.useSkill(card, victim, skillUseInfo.getSkill(), true);
-                Return.returnCard(resolver, skill, card, victim);
                 resolver.getStage().getUI().useSkill(card, victim, skillUseInfo.getSkill(), true);
                 if (victim.getStatus().containsStatus(CardStatusType.召唤)) {
-                    Summon.apply(resolver, skillUseInfo, card, SummonType.Normal, 1, victim.getName());
-                    return;
+                    resolver.killCard(card,victim,skill);//改为杀死卡进入墓地
+                 //   resolver.resolveDeathSkills(card,victim,skillUseInfo.getSkill(),result);//新生可以发动死契
+                    Summon.apply(resolver, skillUseInfo, card, SummonType.Summoning, 1, victim.getName());//新生卡牌可以立即攻击。
                 }
-                resolver.summonCard(card.getOwner(), victim, null, false, skillUseInfo.getSkill());
+                else{
+                    resolver.killCard(card,victim,skill);//改为杀死卡进入墓地
+                //    resolver.resolveDeathSkills(card,victim,skillUseInfo.getSkill(),result);//新生可以发动死契
+                    if(victim.getOwner() !=card.getOwner()) {
+                        victim.switchOwner(victim.getOwner());
+                    }
+                    resolver.summonCard(card.getOwner(), victim, null, false, skillUseInfo.getSkill());
+                }
             }
         }
 

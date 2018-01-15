@@ -29,9 +29,7 @@ public class SoulCrash {
             if (card.getRace() == Race.BOSS) {
                 continue;
             }
-//            if(card.isAlive()){
-                victims.add(card);
-//            }
+            victims.add(card);
         }
         GameUI ui = resolver.getStage().getUI();
         Skill skill = skillUseInfo.getSkill();

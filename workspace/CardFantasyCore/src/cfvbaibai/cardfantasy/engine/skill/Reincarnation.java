@@ -11,7 +11,7 @@ import cfvbaibai.cardfantasy.engine.Player;
 import cfvbaibai.cardfantasy.engine.SkillResolver;
 
 public final class Reincarnation {
-    public static boolean apply(SkillResolver resolver, Skill cardSkill, CardInfo card, boolean unbending) {
+    public static boolean apply(SkillResolver resolver, Skill cardSkill, CardInfo card, boolean unbending,Player opponent) {
         Player player = card.getOwner();
         if (!card.isDead() || unbending) {
             return false; // The card is unbending!
@@ -39,7 +39,7 @@ public final class Reincarnation {
                 player.getGrave().addCard(card);
             }
             if(!player.getGrave().contains(card)&& player.getHand().contains(card))
-            {
+                {
                 return true;
             }
             if (!player.getGrave().contains(card) && player.getField().contains(card)) {
@@ -52,8 +52,13 @@ public final class Reincarnation {
                 return false;
             }
             Grave grave = card.getOwner().getGrave();
+            if(!player.getGrave().contains(card))
+            {
+                //某些情况下召唤属性丢失导致卡牌不能找到。
+                System.out.print("错误转生");
+                return false;
+            }
             grave.removeCard(card);
-//            System.out.print(card);
             Hand hand = card.getOwner().getHand();
             if (hand.isFull()) {
                 ui.cardToDeck(card.getOwner(), card);
@@ -62,6 +67,7 @@ public final class Reincarnation {
                 ui.cardToHand(card.getOwner(), card);
                 hand.addCard(card);
             }
+            HellPrison.apply(resolver,opponent,player);
             return true;
         }
         return false;

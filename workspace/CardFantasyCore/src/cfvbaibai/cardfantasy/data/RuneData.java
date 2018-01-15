@@ -37,7 +37,7 @@ public enum RuneData {
     鹰眼("", RuneClass.WATER, 5, SkillType.弱点攻击, 0, 0, 5, Growth.RUNE, RuneActivator.myField(2, Race.KINGDOM)),
     止水("", RuneClass.WATER, 3, SkillType.水流护甲, 6, 1, 5, Growth.RUNE, RuneActivator.myHeroHP(40)),
     明镜("", RuneClass.WATER, 5, SkillType.镜面, 0, 0, 5, Growth.RUNE, RuneActivator.myField(5, null)),
-    逆流("", RuneClass.WATER, 4, SkillType.扼杀, 0, 0, 4, Growth.RUNE, RuneActivator.enemyGrave(6, null)),
+    逆流("", RuneClass.WATER, 6, SkillType.扼杀, 0, 0, 5, Growth.RUNE, RuneActivator.enemyField(4, null)),
 
     闪电("31385", RuneClass.WIND, 3, SkillType.落雷, 3, 1, 1, Growth.RUNE, RuneActivator.enemyGrave(2, null)),
     雷云("31472", RuneClass.WIND, 3, SkillType.连环闪电, 1, 1, 1, Growth.RUNE, RuneActivator.myHeroHP(50)),
@@ -99,7 +99,7 @@ public enum RuneData {
         this.star = star;
         this.activator = activator;
     }
-
+    
     public String getWikiId() {
         return wikiId;
     }
@@ -131,11 +131,11 @@ public enum RuneData {
     public int getStar() {
         return star;
     }
-
+    
     public RuneActivator getActivator() {
         return this.activator;
     }
-
+    
     public static RuneData getRandomRune() {
         RuneData[] values = RuneData.values();
         int index = Randomizer.getRandomizer().next(0, values.length);
